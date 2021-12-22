@@ -3,7 +3,6 @@ var throttle = require('lodash.throttle');
 const form = document.querySelector('.feedback-form');
 const LOCALSTORAGE_KEY = "feedback-form-state";
 
-
 const savedValue = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
 
 try {
@@ -23,12 +22,16 @@ function onFormInput(e) {
         message: form.elements.message.value
     };
     localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formValue));
+    console.log(savedValue);
 };
 
 function onFormSubmit(e) {
     e.preventDefault();
+    console.log(!form.elements.email.value.trim() && !form.elements.message.value.trim());
+    if (!form.elements.email.value.trim() && !form.elements.message.value.trim()) {
+        return;
+    };
     console.log(savedValue);
     localStorage.removeItem(LOCALSTORAGE_KEY);
-    form.elements.email.value = "";
-    form.elements.message.value = "";
+    form.reset();
 }
