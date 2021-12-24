@@ -13,13 +13,12 @@ function onFormInput(e) {
         message: form.elements.message.value.trim()
     };
     localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formValue));
-    console.log(formValue);
 };
 
 function onFormSubmit(e) {
     e.preventDefault();
     if (!form.elements.email.value.trim() || !form.elements.message.value.trim()) {
-        return alert("Заполните все поля!!!");
+        return;
     };
     const savedValue = parseStorage();
     console.log(savedValue);
